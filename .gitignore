@@ -1,27 +1,51 @@
+# =========================
 # Python
+# =========================
 __pycache__/
 *.pyc
 *.pyo
-.venv/
-venv/
+*.pyd
 *.egg-info/
 dist/
+build/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Environment variables
 .env
+.env.*
 
-# Data / ChromaDB
-backend/data/vectordb/
-backend/data/uploads/
+# =========================
+# Data / Vector DB
+# =========================
+backend/data/
+*.sqlite3
 
-# Node
+# =========================
+# Node / Frontend
+# =========================
 node_modules/
+frontend/node_modules/
 frontend/dist/
 frontend/.vite/
 
-# OS
+# =========================
+# Logs
+# =========================
+*.log
+
+# =========================
+# OS files
+# =========================
 .DS_Store
 Thumbs.db
 
-# IDE
+# =========================
+# IDEs
+# =========================
 .vscode/
 .idea/
 *.swp
