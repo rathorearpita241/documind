@@ -15,7 +15,13 @@ export default function App() {
     try {
       const res = await getDocuments()
       setDocuments(res.data)
+<<<<<<< HEAD
     } catch (e) { console.error('Failed to load documents', e) }
+=======
+    } catch (e) {
+      console.error('Failed to load documents', e)
+    }
+>>>>>>> 0df11b4b1dd14f34b1975cee0a720d8ae5d57227
   }, [])
 
   useEffect(() => { fetchDocs() }, [fetchDocs])
@@ -27,6 +33,7 @@ export default function App() {
   }
 
   return (
+<<<<<<< HEAD
     <div style={{ height: '100vh', display: 'flex', overflow: 'hidden', background: 'var(--ink-950)', position: 'relative' }}>
 
       {/* Ambient background glows */}
@@ -45,6 +52,11 @@ export default function App() {
 
       {/* Sidebar — 220px */}
       <div style={{ width: 220, flexShrink: 0, height: '100%', position: 'relative', zIndex: 1 }}>
+=======
+    <div className="h-screen flex overflow-hidden bg-gray-50">
+      {/* Sidebar — 220px fixed */}
+      <div className="w-56 flex-shrink-0 h-full">
+>>>>>>> 0df11b4b1dd14f34b1975cee0a720d8ae5d57227
         <Sidebar
           documents={documents}
           onDocumentAdded={fetchDocs}
@@ -53,6 +65,7 @@ export default function App() {
         />
       </div>
 
+<<<<<<< HEAD
       {/* Chat — flex 1 */}
       <div style={{ flex: 1, height: '100%', minWidth: 0, position: 'relative', zIndex: 1 }}>
         <ChatArea onNewResponse={handleNewResponse} />
@@ -60,6 +73,15 @@ export default function App() {
 
       {/* Source panel — 256px */}
       <div style={{ width: 256, flexShrink: 0, height: '100%', position: 'relative', zIndex: 1 }}>
+=======
+      {/* Chat — fills remaining space */}
+      <div className="flex-1 h-full min-w-0">
+        <ChatArea onNewResponse={handleNewResponse} />
+      </div>
+
+      {/* Source panel — 260px fixed */}
+      <div className="w-64 flex-shrink-0 h-full">
+>>>>>>> 0df11b4b1dd14f34b1975cee0a720d8ae5d57227
         <SourcePanel
           sources={sources}
           lastQuery={lastQuery}

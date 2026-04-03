@@ -3,6 +3,7 @@ export default {
   content: ['./index.html', './src/**/*.{js,jsx}'],
   theme: {
     extend: {
+<<<<<<< HEAD
       fontFamily: {
         syne: ['Syne', 'sans-serif'],
         mono: ['DM Mono', 'monospace'],
@@ -40,6 +41,22 @@ export default {
           muted:  '#4A1515',
         },
       },
+=======
+      colors: {
+        brand: {
+          50:  '#EEEDFE',
+          100: '#CECBF6',
+          200: '#AFA9EC',
+          400: '#7F77DD',
+          600: '#534AB7',
+          800: '#3C3489',
+          900: '#26215C',
+        }
+      },
+      fontFamily: {
+        sans: ['Inter', 'system-ui', 'sans-serif'],
+      }
+>>>>>>> 0df11b4b1dd14f34b1975cee0a720d8ae5d57227
     }
   },
   plugins: []

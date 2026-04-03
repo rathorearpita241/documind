@@ -19,7 +19,11 @@ def get_collection():
     if _collection is None:
         _client = chromadb.PersistentClient(path=settings.chroma_persist_dir)
         _collection = _client.get_or_create_collection(
+<<<<<<< HEAD
             name="documind",
+=======
+            name="knowdesk",
+>>>>>>> 0df11b4b1dd14f34b1975cee0a720d8ae5d57227
             metadata={"hnsw:space": "cosine"}
         )
     return _collection
