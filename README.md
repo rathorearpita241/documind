@@ -44,4 +44,4 @@ backend (FastAPI)
 ```
 
 ## Domain
-SME01 · Tools for Small and Medium Enterprise · Ignisia 2024
+SME01 · Tools for Small and Medium Enterprise · Ignisia 2026
