@@ -1,21 +1,21 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.api import documents, chat, crm
+from app.api import documents, chat
 
-app = FastAPI(title="Documind API", version="1.0.0")
+app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-app.include_router(documents.router, prefix="/api/documents", tags=["documents"])
-app.include_router(chat.router, prefix="/api/chat", tags=["chat"])
-app.include_router(crm.router, prefix="/api/crm", tags=["crm"])
+# ✅ IMPORTANT ROUTES
+app.include_router(documents.router, prefix="/api/documents")
+app.include_router(chat.router, prefix="/api/chat")
 
 @app.get("/")
 def root():
-    return {"status": "ok", "service": "Documind"}
+    return {"message": "Backend running"}

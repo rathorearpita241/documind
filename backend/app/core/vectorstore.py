@@ -1,33 +1,16 @@
 import chromadb
-from chromadb.config import Settings as ChromaSettings
-from sentence_transformers import SentenceTransformer
+from chromadb.config import Settings
+from langchain_community.embeddings import HuggingFaceEmbeddings
 
-from app.core.config import settings
+CHROMA_DB_DIR = "db"
 
-_client = None
-_collection = None
-_embedder = None
+client = chromadb.Client(
+    Settings(persist_directory=CHROMA_DB_DIR)
+)
 
+def get_collection(name="documents"):
+    return client.get_or_create_collection(name=name)
 
-def get_client():
-    global _client
-    if _client is None:
-        _client = chromadb.Client(
-            ChromaSettings(persist_directory=settings.chroma_persist_dir)
-        )
-    return _client
-
-
-def get_collection():
-    global _collection
-    if _collection is None:
-        client = get_client()
-        _collection = client.get_or_create_collection(name="documind")
-    return _collection
-
-
+# ✅ FAST + RELIABLE EMBEDDINGS
 def get_embedder():
-    global _embedder
-    if _embedder is None:
-        _embedder = SentenceTransformer(settings.embedding_model)
-    return _embedder
+    return HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
