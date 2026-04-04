@@ -1,7 +1,7 @@
 <<<<<<< HEAD
 # Documind — SME Knowledge Retrieval Agent
 =======
-# KnowDesk — SME Knowledge Retrieval Agent
+
 >>>>>>> 0df11b4b1dd14f34b1975cee0a720d8ae5d57227
 > Ignisia AI Hackathon · SME01
 
