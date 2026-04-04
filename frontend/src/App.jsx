@@ -1,93 +1,32 @@
-import { useState, useEffect, useCallback } from 'react'
-import Sidebar from './components/Sidebar'
-import ChatArea from './components/ChatArea'
-import SourcePanel from './components/SourcePanel'
-import { getDocuments } from './utils/api'
+import ChatArea from "./components/ChatArea";
+import Sidebar from "./components/Sidebar";
+import SourcePanel from "./components/SourcePanel";
+import TicketPanel from "./components/TicketPanel";
+import { useState } from "react";
 
 export default function App() {
-  const [documents, setDocuments] = useState([])
-  const [activeDocId, setActiveDocId] = useState(null)
-  const [sources, setSources] = useState([])
-  const [lastQuery, setLastQuery] = useState(null)
-  const [lastResponse, setLastResponse] = useState(null)
-
-  const fetchDocs = useCallback(async () => {
-    try {
-      const res = await getDocuments()
-      setDocuments(res.data)
-<<<<<<< HEAD
-    } catch (e) { console.error('Failed to load documents', e) }
-=======
-    } catch (e) {
-      console.error('Failed to load documents', e)
-    }
->>>>>>> 0df11b4b1dd14f34b1975cee0a720d8ae5d57227
-  }, [])
-
-  useEffect(() => { fetchDocs() }, [fetchDocs])
-
-  function handleNewResponse({ query, response, sources: srcs }) {
-    setSources(srcs || [])
-    setLastQuery(query)
-    setLastResponse(response)
-  }
+  const [sources, setSources] = useState([]);
+  const [conflict, setConflict] = useState(null);
+  const [ticket, setTicket] = useState(null);
 
   return (
-<<<<<<< HEAD
-    <div style={{ height: '100vh', display: 'flex', overflow: 'hidden', background: 'var(--ink-950)', position: 'relative' }}>
+    <>
+      <div className="header">🚀 DocuMind AI</div>
 
-      {/* Ambient background glows */}
-      <div style={{
-        position: 'absolute', top: -120, left: -120,
-        width: 500, height: 500, borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(245,166,35,0.06) 0%, transparent 70%)',
-        pointerEvents: 'none',
-      }} />
-      <div style={{
-        position: 'absolute', bottom: -100, right: 200,
-        width: 400, height: 400, borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(46,202,160,0.04) 0%, transparent 70%)',
-        pointerEvents: 'none',
-      }} />
+      <div className="app">
+        <Sidebar />
 
-      {/* Sidebar — 220px */}
-      <div style={{ width: 220, flexShrink: 0, height: '100%', position: 'relative', zIndex: 1 }}>
-=======
-    <div className="h-screen flex overflow-hidden bg-gray-50">
-      {/* Sidebar — 220px fixed */}
-      <div className="w-56 flex-shrink-0 h-full">
->>>>>>> 0df11b4b1dd14f34b1975cee0a720d8ae5d57227
-        <Sidebar
-          documents={documents}
-          onDocumentAdded={fetchDocs}
-          activeDocId={activeDocId}
-          onSelectDoc={setActiveDocId}
+        <ChatArea
+          setSources={setSources}
+          setConflict={setConflict}
+          setTicket={setTicket}
         />
-      </div>
 
-<<<<<<< HEAD
-      {/* Chat — flex 1 */}
-      <div style={{ flex: 1, height: '100%', minWidth: 0, position: 'relative', zIndex: 1 }}>
-        <ChatArea onNewResponse={handleNewResponse} />
+        <div className="rightPanel">
+          <TicketPanel ticket={ticket} />
+          <SourcePanel sources={sources} conflict={conflict} />
+        </div>
       </div>
-
-      {/* Source panel — 256px */}
-      <div style={{ width: 256, flexShrink: 0, height: '100%', position: 'relative', zIndex: 1 }}>
-=======
-      {/* Chat — fills remaining space */}
-      <div className="flex-1 h-full min-w-0">
-        <ChatArea onNewResponse={handleNewResponse} />
-      </div>
-
-      {/* Source panel — 260px fixed */}
-      <div className="w-64 flex-shrink-0 h-full">
->>>>>>> 0df11b4b1dd14f34b1975cee0a720d8ae5d57227
-        <SourcePanel
-          sources={sources}
-          lastQuery={lastQuery}
-          lastResponse={lastResponse}
-        />
-      </div>
-    </div>
-  )
+    </>
+  );
 }
