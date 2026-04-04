@@ -1,10 +1,27 @@
 from fastapi import APIRouter
-from app.models.schemas import ChatRequest, ChatResponse
+from pydantic import BaseModel
+
 from app.services.rag import answer
+from app.services.crm import build_ticket
 
 router = APIRouter()
 
+class ChatRequest(BaseModel):
+    query: str
+    session_id: str = "default"
 
-@router.post("/", response_model=ChatResponse)
+
+@router.post("/")
 def chat(req: ChatRequest):
-    return answer(req.query, req.session_id)
+    # 🔥 Get RAG response
+    response = answer(req.query, req.session_id)
+
+    # 🔥 AUTO CREATE CRM TICKET
+    ticket = build_ticket(req.query, response)
+
+    return {
+        "answer": response.answer,
+        "sources": response.sources,
+        "conflict": response.conflict,
+        "ticket": ticket   # 👈 NEW
+    }
